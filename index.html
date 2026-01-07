@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portafolio | Frontend Developer</title>
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #0b0b12;
+        --card: rgba(255, 255, 255, 0.04);
+        --text: #eaeaf0;
+        --muted: #9a9ab3;
+        --primary: #8b5cf6;
+        --primary-soft: rgba(139, 92, 246, 0.15);
+        --border: rgba(255, 255, 255, 0.08);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        background: radial-gradient(circle at top, #141428, #08080f 60%);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Fondo con estrellas */
+      .stars {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background: radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+          radial-gradient(1.5px 1.5px at 80% 20%, #fff, transparent),
+          radial-gradient(1px 1px at 60% 70%, #fff, transparent),
+          radial-gradient(2px 2px at 30% 80%, #fff, transparent),
+          radial-gradient(1.5px 1.5px at 90% 60%, #fff, transparent);
+        opacity: 0.15;
+        animation: float 40s linear infinite;
+      }
+
+      @keyframes float {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-200px);
+        }
+      }
+
+      header {
+        max-width: 1100px;
+        margin: auto;
+        padding: 2rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h1 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      nav a {
+        margin-left: 1.5rem;
+        text-decoration: none;
+        color: var(--muted);
+        font-size: 0.95rem;
+        transition: color 0.2s ease;
+      }
+
+      nav a:hover {
+        color: var(--primary);
+      }
+
+      .hero {
+        max-width: 1100px;
+        margin: auto;
+        padding: 6rem 1.5rem 4rem;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .hero h2 {
+        font-size: 3rem;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+      }
+
+      .hero span {
+        color: var(--primary);
+      }
+
+      .hero p {
+        color: var(--muted);
+        margin-bottom: 2rem;
+        max-width: 520px;
+      }
+
+      .buttons a {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        margin-right: 1rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        text-decoration: none;
+        color: var(--text);
+        font-size: 0.9rem;
+        transition: all 0.25s ease;
+      }
+
+      .buttons a.primary {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: #fff;
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+      }
+
+      .buttons a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      section {
+        max-width: 1100px;
+        margin: auto;
+        padding: 4rem 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 2px;
+        background: var(--primary);
+        margin-top: 0.5rem;
+        border-radius: 2px;
+      }
+
+      .skills {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1rem;
+      }
+
+      .skill {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 1rem;
+        border-radius: 12px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--muted);
+        transition: all 0.2s ease;
+      }
+
+      .skill:hover {
+        border-color: var(--primary);
+        color: var(--text);
+        box-shadow: 0 0 12px var(--primary-soft);
+        transform: translateY(-3px);
+      }
+
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .project {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.5rem;
+        transition: all 0.25s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .project:hover {
+        border-color: var(--primary);
+        box-shadow: 0 0 20px var(--primary-soft);
+        transform: translateY(-4px);
+      }
+
+      .project h3 {
+        margin-bottom: 0.5rem;
+      }
+
+      .project p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .project .tags span {
+        display: inline-block;
+        font-size: 0.75rem;
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        background: rgba(139, 92, 246, 0.15);
+        color: var(--primary);
+        margin-right: 0.4rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .project a {
+        margin-top: 1rem;
+        align-self: flex-start;
+        text-decoration: none;
+        font-size: 0.85rem;
+        color: var(--primary);
+      }
+
+      footer {
+        text-align: center;
+        padding: 3rem 1.5rem;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .buttons {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stars"></div>
+
+    <header>
+      <h1>
+        Huesly <br />
+        Carvajal
+      </h1>
+      <nav>
+        <a href="#about">Sobre mí</a>
+        <a href="#skills">Habilidades</a>
+        <a href="#projects">Proyectos</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div>
+          <h2>Frontend <span>Developer</span></h2>
+          <p>
+            Desarrollo interfaces modernas, rápidas y responsivas utilizando
+            HTML, CSS y JavaScript. Me enfoco en experiencias limpias con diseño
+            minimalista.
+          </p>
+          <div class="buttons">
+            <a href="#projects" class="primary">Ver proyectos</a>
+            <a href="#contact">Contactar</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <h3 class="section-title">Sobre mí</h3>
+        <p style="color: var(--muted); max-width: 700px">
+          Soy desarrollador frontend especializado en la creación de interfaces
+          web modernas, accesibles y optimizadas. He trabajado en landing pages,
+          paneles administrativos y sitios corporativos, cuidando tanto el
+          diseño como la experiencia del usuario.
+        </p>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <h3 class="section-title">Habilidades</h3>
+        <div class="skills">
+          <div class="skill">HTML5</div>
+          <div class="skill">CSS</div>
+          <div class="skill">JavaScript</div>
+          <div class="skill">Responsive Design</div>
+          <div class="skill">Git & GitHub</div>
+          <div class="skill">UE5 Blueprints</div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <h3 class="section-title">Proyectos</h3>
+        <div class="projects">
+          <div class="project">
+            <div>
+              <h3>Los santos360</h3>
+              <p>
+                Sitio web turístico con diseño responsive y enfoque en
+                experiencia de usuario.
+              </p>
+              <div class="tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>SEO</span>
+                <span>Responsive</span>
+                <span>JavaScript</span>
+              </div>
+            </div>
+            <a href="https://lossantos360.com/" target="_blank"
+              >Ver proyecto →</a
+            >
+          </div>
+
+          <div class="project">
+            <div>
+              <h3>Sonar</h3>
+              <p>
+                Landing page moderna diseñada para fortalecer la presencia
+                digital de la empresa, enfocada en comunicar su propuesta de
+                valor de forma clara y atractiva para el usuario.
+              </p>
+              <div class="tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>Responsive</span>
+              </div>
+            </div>
+            <a href="https://sonar.com.co/" target="_blank">Ver proyecto →</a>
+          </div>
+
+          <div class="project">
+            <div>
+              <h3>Territorios</h3>
+              <p>
+                Web enfocada en mobile para contribuir a la comprencion y
+                aplicacion de estrategias de intervención en cada comunidad.
+              </p>
+              <div class="tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>Responsive</span>
+              </div>
+            </div>
+            <a href="https://territorios.co/" target="_blank">Ver proyecto →</a>
+          </div>
+
+          <div class="project">
+            <div>
+              <h3>Carta Interactiva Zona Café</h3>
+              <p>
+                Diseño de una carta digital optimizada para tablets, enfocada en
+                una experiencia de usuario intuitiva que agiliza la toma de
+                pedidos dentro del restaurante.
+              </p>
+              <div class="tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>Responsive</span>
+              </div>
+            </div>
+            <a
+              href="https://lossantos360.com/carta-interactiva/zona-cafe/carta/"
+              target="_blank"
+              >Ver proyecto →</a
+            >
+          </div>
+
+          <div class="project">
+            <div>
+              <h3>Appgro</h3>
+              <p>
+                Desarrollo frontend de una landing page one-page con traducción
+                ES/EN, implementada en HTML, CSS y JavaScript, priorizando
+                simplicidad, rendimiento y experiencia de usuario.
+              </p>
+              <div class="tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>Responsive</span>
+              </div>
+            </div>
+            <a
+              href="https://lossantos360.com/carta-interactiva/zona-cafe/carta/"
+              target="_blank"
+              >Ver proyecto →</a
+            >
+          </div>
+          <div class="project">
+            <div>
+              <h3>Acolcti</h3>
+              <p>
+                Landing page moderna diseñada para fortalecer la presencia
+                digital de la empresa, enfocada en comunicar su propuesta de
+                valor de forma clara y atractiva para el usuario.
+              </p>
+              <div class="tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>PHP</span>
+                <span>JavaScript</span>
+                <span>Responsive</span>
+              </div>
+            </div>
+            <a href="https://acolcti.com/" target="_blank">Ver proyecto →</a>
+          </div>
+
+          <div class="project">
+            <div>
+              <h3>Separa y Gana</h3>
+              <p>
+                Proyecto de videojuego desarrollado en Unreal Engine 5, donde
+                participé como apoyo externo a través de una empresa tercera,
+                encargándome de la arquitectura de la lógica del juego con
+                Blueprints para su presentación en el IMCT de Bucaramanga.
+              </p>
+              <div class="tags">
+                <span>UE5</span>
+                <span>Blueprints</span>
+              </div>
+            </div>
+            <a
+              href="https://lossantos360.com/carta-interactiva/zona-cafe/carta/"
+              target="_blank"
+              >Ver proyecto →</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <h3 class="section-title">Contacto</h3>
+        <p style="color: var(--muted); margin-bottom: 1rem">
+          ¿Tienes un proyecto o una vacante? Hablemos.
+        </p>
+        <div class="buttons">
+          <a href="mailto:hueslyc@email.com" class="primary">Enviar correo</a>
+          <a href="https://www.linkedin.com/in/huesly-carvajal/" target="_blank"
+            >LinkedIn</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer>© 2026 — Portafolio Huesly Frontend</footer>
+
+    <script>
+      // Animación suave al hacer scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
