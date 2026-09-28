@@ -271,7 +271,7 @@
       /* Proyectos */
       .projects {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
         gap: 1.75rem;
       }
 
@@ -537,7 +537,7 @@
 
       .slider {
         position: relative;
-        aspect-ratio: 16 / 9;
+        height: min(72vh, 560px);
         background: var(--sidebar);
       }
 
@@ -599,7 +599,55 @@
         border-color: var(--terracota);
       }
 
-            /* Selector de idioma */
+            .sidebar__menu {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        flex: 1;
+        min-height: 0;
+      }
+
+      /* Botón hamburguesa (solo móvil) */
+      .menu-toggle {
+        display: none;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        cursor: pointer;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        flex: none;
+      }
+
+      .menu-toggle span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--chocolate);
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+
+      .sidebar.is-open .menu-toggle span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .sidebar.is-open .menu-toggle span:nth-child(2) {
+        opacity: 0;
+      }
+      .sidebar.is-open .menu-toggle span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      .footer__inner {
+        padding: 0 3rem;
+      }
+
+      /* Selector de idioma */
       .lang {
         display: inline-flex;
         margin: 1rem 0 0 0.9rem;
@@ -632,16 +680,12 @@
         color: var(--terracota-soft);
       }
 
-      @media (max-width: 960px) {
-        .lang {
-          margin: 0 0 0 0.75rem;
-          align-self: center;
-          flex: none;
-        }
-      }
-
       /* ===== Responsive ===== */
       @media (max-width: 960px) {
+        html {
+          scroll-padding-top: 5rem;
+        }
+
         .layout {
           grid-template-columns: 1fr;
         }
@@ -654,9 +698,8 @@
           flex-direction: row;
           align-items: center;
           justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 0.5rem 1rem;
-          padding: 0.9rem 1.25rem;
+          gap: 1rem;
+          padding: 0.7rem 1.25rem;
           border-right: none;
           border-bottom: 1px solid var(--line);
         }
@@ -665,28 +708,45 @@
           font-size: 1.15rem;
         }
 
-        .brand p,
-        .sidebar__contact {
+        .brand p {
           display: none;
         }
 
-        .nav {
-          flex-direction: row;
-          gap: 0;
-          overflow-x: auto;
+        .menu-toggle {
+          display: inline-flex;
+        }
+
+        .sidebar__menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          padding: 1rem 1.25rem 1.5rem;
+          gap: 1.25rem;
+          background: var(--sidebar);
+          border-bottom: 1px solid var(--line);
+          box-shadow: 0 18px 30px rgba(74, 44, 34, 0.12);
+          max-height: calc(100vh - 72px);
+          max-height: calc(100dvh - 72px);
+          overflow-y: auto;
+        }
+
+        .sidebar.is-open .sidebar__menu {
+          display: flex;
         }
 
         .nav a {
-          border-left: none;
-          border-bottom: 3px solid transparent;
-          border-radius: 8px 8px 0 0;
-          padding: 0.45rem 0.7rem;
-          white-space: nowrap;
-          font-size: 0.9rem;
+          padding: 0.8rem 0.9rem;
+          font-size: 1.02rem;
         }
 
-        .nav a[aria-current="true"] {
-          border-bottom-color: var(--terracota);
+        .lang {
+          margin: 0.5rem 0 0 0.9rem;
+        }
+
+        .sidebar__contact {
+          margin-top: 0;
         }
 
         main {
@@ -705,6 +765,10 @@
         .contact__panel {
           padding: 2.5rem 1.5rem;
         }
+
+        .footer__inner {
+          padding: 0 1.25rem;
+        }
       }
 
       @media (max-width: 520px) {
@@ -714,6 +778,32 @@
         .slider__btn {
           width: 40px;
           height: 40px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .modal.is-open {
+          place-items: end center;
+        }
+
+        .modal__panel {
+          width: 100vw;
+          border-radius: 16px 16px 0 0;
+        }
+
+        .slider {
+          height: 62vh;
+          height: 62dvh;
+        }
+
+        .slider__dots {
+          gap: 12px;
+          padding: 14px 12px calc(18px + env(safe-area-inset-bottom));
+        }
+
+        .slider__dot {
+          width: 12px;
+          height: 12px;
         }
       }
 
@@ -737,6 +827,18 @@
           <p>Frontend Developer</p>
         </div>
 
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Menú"
+          aria-expanded="false"
+          aria-controls="sidebarMenu"
+        >
+          <span></span><span></span><span></span>
+        </button>
+
+        <div class="sidebar__menu" id="sidebarMenu">
         <nav class="nav" aria-label="Principal">
           <a href="#inicio">Inicio</a>
           <a href="#about">Sobre mí</a>
@@ -758,6 +860,7 @@
             >LinkedIn</a
           >
         </div>
+              </div>
       </aside>
 
       <div>
@@ -1117,7 +1220,7 @@
         </main>
 
         <footer>
-          <div style="padding: 0 3rem">© 2026 — Portafolio Huesly Frontend</div>
+          <div class="footer__inner">© 2026 — Portafolio Huesly Frontend</div>
         </footer>
       </div>
     </div>
@@ -1265,6 +1368,9 @@
 
       function renderSlide() {
         sliderImg.src = currentGallery.images[currentIndex];
+        // Precarga la siguiente imagen para que el cambio sea inmediato
+        new Image().src =
+          currentGallery.images[(currentIndex + 1) % currentGallery.images.length];
         [...dotsWrap.children].forEach((dot, i) => {
           dot.classList.toggle("is-active", i === currentIndex);
         });
@@ -1317,9 +1423,55 @@
         if (e.key === "ArrowRight") next();
       });
     
+      // ===== Menú hamburguesa (móvil) =====
+      const sidebar = document.querySelector(".sidebar");
+      const menuToggle = document.getElementById("menuToggle");
+
+      function setMenu(open) {
+        sidebar.classList.toggle("is-open", open);
+        menuToggle.setAttribute("aria-expanded", String(open));
+      }
+
+      menuToggle.addEventListener("click", () =>
+        setMenu(!sidebar.classList.contains("is-open"))
+      );
+      navLinks.forEach((a) => a.addEventListener("click", () => setMenu(false)));
+      document.addEventListener("click", (e) => {
+        if (!sidebar.contains(e.target)) setMenu(false);
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && sidebar.classList.contains("is-open")) {
+          setMenu(false);
+          menuToggle.focus();
+        }
+      });
+      window
+        .matchMedia("(min-width: 961px)")
+        .addEventListener("change", (e) => {
+          if (e.matches) setMenu(false);
+        });
+
+      // ===== Deslizar para cambiar de imagen (táctil) =====
+      let touchStartX = null;
+      const sliderEl = document.querySelector(".slider");
+      sliderEl.addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartX = e.changedTouches[0].clientX;
+        },
+        { passive: true }
+      );
+      sliderEl.addEventListener("touchend", (e) => {
+        if (touchStartX === null) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        touchStartX = null;
+        if (Math.abs(dx) > 40) (dx < 0 ? next : prev)();
+      });
+
       // ===== Idioma ES / EN =====
       const I18N_EN = {
         "Principal": "Main",
+        "Menú": "Menu",
         "Idioma": "Language",
         "Inicio": "Home",
         "Sobre mí": "About",
