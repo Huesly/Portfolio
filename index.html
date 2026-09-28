@@ -3,274 +3,477 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portafolio | Frontend Developer</title>
+    <title>Huesly Carvajal | Frontend Developer</title>
+    <meta
+      name="description"
+      content="Portafolio de Huesly Carvajal, desarrollador frontend: interfaces web modernas, rápidas y responsivas."
+    />
 
-    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
     <style>
+      /* ===== Paleta del CV ===== */
       :root {
-        --bg: #0b0b12;
-        --card: rgba(255, 255, 255, 0.04);
-        --text: #eaeaf0;
-        --muted: #9a9ab3;
-        --primary: #8b5cf6;
-        --primary-soft: rgba(139, 92, 246, 0.15);
-        --border: rgba(255, 255, 255, 0.08);
+        --chocolate: #4a2c22; /* principal */
+        --terracota: #d96c2f; /* acento */
+        --terracota-dark: #c45f26; /* hover / texto de acento */
+        --terracota-soft: #f4e3d8; /* acento suave */
+        --ink: #2b2b2b; /* texto principal */
+        --muted: #6b7280; /* texto secundario */
+        --bg: #fafaf9; /* fondo */
+        --card: #ffffff; /* tarjetas */
+        --sidebar: #f8f5f1; /* sidebar */
+        --line: #ece8e4; /* divisores */
+
+        --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+        --font-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+        --sidebar-w: 280px;
       }
 
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Inter", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 1.5rem;
       }
 
       body {
-        background: radial-gradient(circle at top, #141428, #08080f 60%);
-        color: var(--text);
+        font-family: var(--font-body);
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--terracota);
+        outline-offset: 3px;
+        border-radius: 6px;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      /* ===== Layout: sidebar + contenido ===== */
+      .layout {
+        display: grid;
+        grid-template-columns: var(--sidebar-w) 1fr;
         min-height: 100vh;
-        overflow-x: hidden;
       }
 
-      /* Fondo con estrellas */
-      .stars {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        background: radial-gradient(2px 2px at 20% 30%, #fff, transparent),
-          radial-gradient(1.5px 1.5px at 80% 20%, #fff, transparent),
-          radial-gradient(1px 1px at 60% 70%, #fff, transparent),
-          radial-gradient(2px 2px at 30% 80%, #fff, transparent),
-          radial-gradient(1.5px 1.5px at 90% 60%, #fff, transparent);
-        opacity: 0.15;
-        animation: float 40s linear infinite;
-      }
-
-      @keyframes float {
-        from {
-          transform: translateY(0);
-        }
-        to {
-          transform: translateY(-200px);
-        }
-      }
-
-      header {
-        max-width: 1100px;
-        margin: auto;
-        padding: 2rem 1.5rem;
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        background: var(--sidebar);
+        border-right: 1px solid var(--line);
+        padding: 2.5rem 1.75rem;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        gap: 2.5rem;
       }
 
-      header h1 {
-        font-size: 1.1rem;
-        font-weight: 600;
-        letter-spacing: 0.5px;
+      .brand h1 {
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+        font-weight: 800;
+        line-height: 1.1;
+        color: var(--chocolate);
+        letter-spacing: -0.02em;
       }
 
-      nav a {
-        margin-left: 1.5rem;
-        text-decoration: none;
+      .brand p {
+        margin-top: 0.5rem;
         color: var(--muted);
         font-size: 0.95rem;
-        transition: color 0.2s ease;
       }
 
-      nav a:hover {
-        color: var(--primary);
+      .nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
       }
 
-      .hero {
-        max-width: 1100px;
-        margin: auto;
-        padding: 6rem 1.5rem 4rem;
-        display: grid;
-        grid-template-columns: 1.2fr 1fr;
-        gap: 3rem;
-        align-items: center;
-      }
-
-      .hero h2 {
-        font-size: 3rem;
-        line-height: 1.1;
-        margin-bottom: 1rem;
-      }
-
-      .hero span {
-        color: var(--primary);
-      }
-
-      .hero p {
-        color: var(--muted);
-        margin-bottom: 2rem;
-        max-width: 520px;
-      }
-
-      .buttons a {
-        display: inline-block;
-        padding: 0.75rem 1.5rem;
-        margin-right: 1rem;
-        border-radius: 999px;
-        border: 1px solid var(--border);
+      .nav a {
+        display: block;
         text-decoration: none;
-        color: var(--text);
+        padding: 0.55rem 0.9rem;
+        border-left: 3px solid transparent;
+        border-radius: 0 8px 8px 0;
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 0.97rem;
+        transition: color 0.2s ease, background 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .nav a:hover {
+        color: var(--terracota-dark);
+        background: var(--terracota-soft);
+      }
+
+      .nav a[aria-current="true"] {
+        color: var(--chocolate);
+        border-left-color: var(--terracota);
+        background: #fff;
+      }
+
+      .sidebar__contact {
+        margin-top: auto;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
         font-size: 0.9rem;
-        transition: all 0.25s ease;
       }
 
-      .buttons a.primary {
-        background: var(--primary);
-        border-color: var(--primary);
-        color: #fff;
-        box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+      .sidebar__contact a {
+        color: var(--chocolate);
+        text-decoration: none;
+        font-weight: 600;
+        overflow-wrap: anywhere;
       }
 
-      .buttons a:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      .sidebar__contact a:hover {
+        color: var(--terracota-dark);
+        text-decoration: underline;
+      }
+
+      /* ===== Contenido ===== */
+      main {
+        width: 100%;
+        max-width: 1020px;
+        padding: 0 3rem;
       }
 
       section {
-        max-width: 1100px;
-        margin: auto;
-        padding: 4rem 1.5rem;
+        padding: 5rem 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .hero {
+        border-top: none;
+        padding: 7rem 0 5.5rem;
+      }
+
+      .hero h2 {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: clamp(2.6rem, 5.6vw, 4.6rem);
+        line-height: 1.02;
+        letter-spacing: -0.035em;
+        color: var(--chocolate);
+        max-width: 14ch;
+      }
+
+      .hero p {
+        margin-top: 1.75rem;
+        max-width: 52ch;
+        font-size: 1.15rem;
+        color: var(--muted);
+      }
+
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        margin-top: 2.25rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.85rem 1.6rem;
+        border-radius: 10px;
+        border: 2px solid var(--chocolate);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--chocolate);
+        transition: background 0.2s ease, color 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .btn:hover {
+        background: var(--terracota-soft);
+        border-color: var(--terracota-dark);
+        color: var(--terracota-dark);
+      }
+
+      .btn--primary {
+        background: var(--terracota);
+        border-color: var(--terracota);
+        color: #fff;
+      }
+
+      .btn--primary:hover {
+        background: var(--terracota-dark);
+        border-color: var(--terracota-dark);
+        color: #fff;
       }
 
       .section-title {
-        font-size: 1.8rem;
-        margin-bottom: 2rem;
-        position: relative;
+        font-family: var(--font-display);
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--chocolate);
+        margin-bottom: 1.75rem;
       }
 
-      .section-title::after {
-        content: "";
-        display: block;
-        width: 60px;
-        height: 2px;
-        background: var(--primary);
-        margin-top: 0.5rem;
-        border-radius: 2px;
+      .about p {
+        max-width: 62ch;
+        font-size: 1.1rem;
+        color: var(--ink);
       }
 
+      /* Habilidades: lista con divisores */
       .skills {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 1rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 3rem;
+        max-width: 640px;
       }
 
-      .skill {
-        background: var(--card);
-        border: 1px solid var(--border);
-        padding: 1rem;
-        border-radius: 12px;
-        text-align: center;
-        font-size: 0.9rem;
-        color: var(--muted);
-        transition: all 0.2s ease;
+      .skills li {
+        padding: 0.9rem 0;
+        border-bottom: 1px solid var(--line);
+        font-weight: 600;
+        color: var(--chocolate);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
       }
 
-      .skill:hover {
-        border-color: var(--primary);
-        color: var(--text);
-        box-shadow: 0 0 12px var(--primary-soft);
-        transform: translateY(-3px);
+      .skills li::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--terracota);
+        flex: none;
       }
 
+      /* Proyectos */
       .projects {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.75rem;
       }
 
       .project {
         background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 1.5rem;
-        transition: all 0.25s ease;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
       }
 
       .project:hover {
-        border-color: var(--primary);
-        box-shadow: 0 0 20px var(--primary-soft);
-        transform: translateY(-4px);
+        border-color: var(--terracota);
+        box-shadow: 0 10px 28px rgba(74, 44, 34, 0.1);
+      }
+
+      .project__cover {
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        background: var(--terracota-soft);
+        border: none;
+        border-bottom: 1px solid var(--line);
+        overflow: hidden;
+        padding: 0;
+      }
+
+      .project__cover--alt {
+        background: var(--line);
+      }
+
+      .project__cover::before {
+        content: attr(data-initial);
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 4.5rem;
+        color: var(--chocolate);
+        opacity: 0.85;
+      }
+
+      .project__badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 1;
+        padding: 0.25rem 0.7rem;
+        border-radius: 6px;
+        background: var(--chocolate);
+        color: var(--terracota-soft);
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      button.project__cover {
+        cursor: pointer;
+      }
+
+      .project__cover img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+        background: var(--sidebar);
+        transition: transform 0.4s ease;
+      }
+
+      button.project__cover:hover img {
+        transform: scale(1.03);
+      }
+
+      .project__body {
+        padding: 1.4rem 1.4rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
       }
 
       .project h3 {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--chocolate);
         margin-bottom: 0.5rem;
       }
 
       .project p {
         color: var(--muted);
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         margin-bottom: 1rem;
       }
 
-      .project .tags span {
-        display: inline-block;
-        font-size: 0.75rem;
-        padding: 0.25rem 0.6rem;
-        border-radius: 999px;
-        background: rgba(139, 92, 246, 0.15);
-        color: var(--primary);
-        margin-right: 0.4rem;
-        margin-bottom: 0.4rem;
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 1.25rem;
       }
 
-      .project a {
-        margin-top: 1rem;
+      .tags li {
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 0.2rem 0.65rem;
+        border-radius: 6px;
+        background: var(--terracota-soft);
+        color: var(--chocolate);
+      }
+
+      .project__link {
+        margin-top: auto;
         align-self: flex-start;
-        text-decoration: none;
-        font-size: 0.85rem;
-        color: var(--primary);
-      }
-
-      footer {
-        text-align: center;
-        padding: 3rem 1.5rem;
-        color: var(--muted);
-        font-size: 0.85rem;
-      }
-
-      /* Responsive */
-      @media (max-width: 900px) {
-        .hero {
-          grid-template-columns: 1fr;
-          text-align: center;
-        }
-
-        .buttons {
-          display: flex;
-          justify-content: center;
-          flex-wrap: wrap;
-        }
-      }
-
-      /* ===== Modal Slider ===== */
-      .project button.open-gallery {
-        margin-top: 1rem;
-        align-self: flex-start;
-        background: transparent;
+        background: none;
         border: none;
         padding: 0;
         cursor: pointer;
-        font-size: 0.85rem;
-        color: var(--primary);
-      }
-
-      .project button.open-gallery:hover {
+        font: inherit;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--terracota-dark);
         text-decoration: underline;
+        text-decoration-color: transparent;
+        text-underline-offset: 4px;
+        transition: text-decoration-color 0.2s ease;
       }
 
+      .project__link:hover {
+        text-decoration-color: currentColor;
+      }
+
+      .project__note {
+        margin-top: auto;
+        font-size: 0.9rem;
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      /* Contacto: el bloque más oscuro de la página */
+      .contact {
+        padding-bottom: 4rem;
+      }
+
+      .contact__panel {
+        background: var(--chocolate);
+        color: var(--terracota-soft);
+        border-radius: 20px;
+        padding: 3.5rem 3rem;
+      }
+
+      .contact__panel h2 {
+        font-family: var(--font-display);
+        font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+        color: #fff;
+        max-width: 18ch;
+      }
+
+      .contact__panel p {
+        margin-top: 1rem;
+        max-width: 46ch;
+        font-size: 1.1rem;
+      }
+
+      .contact__panel .btn {
+        border-color: var(--terracota-soft);
+        color: var(--terracota-soft);
+      }
+
+      .contact__panel .btn:hover {
+        background: rgba(244, 227, 216, 0.14);
+        color: #fff;
+        border-color: #fff;
+      }
+
+      .contact__panel .btn--primary {
+        background: var(--terracota-soft);
+        border-color: var(--terracota-soft);
+        color: var(--chocolate);
+      }
+
+      .contact__panel .btn--primary:hover {
+        background: #fff;
+        border-color: #fff;
+        color: var(--chocolate);
+      }
+
+      footer {
+        padding: 0 0 3rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      /* ===== Modal / slider ===== */
       .modal {
         position: fixed;
         inset: 0;
@@ -286,17 +489,16 @@
       .modal__backdrop {
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.65);
-        backdrop-filter: blur(6px);
+        background: rgba(43, 28, 22, 0.7);
+        backdrop-filter: blur(4px);
       }
 
       .modal__panel {
         position: relative;
         width: min(960px, 92vw);
         border-radius: 16px;
-        border: 1px solid var(--border);
-        background: rgba(15, 15, 24, 0.9);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        background: var(--card);
+        box-shadow: 0 24px 70px rgba(43, 28, 22, 0.45);
         overflow: hidden;
       }
 
@@ -304,36 +506,39 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0.9rem 1rem;
-        border-bottom: 1px solid var(--border);
+        padding: 0.9rem 1.1rem;
+        border-bottom: 1px solid var(--line);
+        background: var(--sidebar);
       }
 
       .modal__title {
-        font-size: 0.95rem;
-        color: var(--text);
-        font-weight: 600;
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--chocolate);
       }
 
       .modal__close {
         width: 40px;
         height: 40px;
-        border-radius: 999px;
-        border: 1px solid var(--border);
-        background: transparent;
-        color: var(--text);
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--chocolate);
+        font-size: 1rem;
         cursor: pointer;
-        transition: transform 0.15s ease, border-color 0.2s ease;
+        transition: background 0.2s ease, color 0.2s ease;
       }
 
       .modal__close:hover {
-        border-color: var(--primary);
-        transform: scale(1.03);
+        background: var(--terracota-soft);
+        color: var(--terracota-dark);
       }
 
       .slider {
         position: relative;
         aspect-ratio: 16 / 9;
-        background: rgba(255, 255, 255, 0.03);
+        background: var(--sidebar);
       }
 
       .slider__img {
@@ -349,19 +554,20 @@
         transform: translateY(-50%);
         width: 44px;
         height: 44px;
-        border-radius: 999px;
-        border: 1px solid var(--border);
-        background: rgba(0, 0, 0, 0.35);
-        color: var(--text);
+        border-radius: 50%;
+        border: none;
+        background: var(--chocolate);
+        color: #fff;
+        font-size: 1.4rem;
+        line-height: 1;
         cursor: pointer;
         display: grid;
         place-items: center;
-        transition: border-color 0.2s ease, transform 0.15s ease;
+        transition: background 0.2s ease;
       }
 
       .slider__btn:hover {
-        border-color: var(--primary);
-        transform: translateY(-50%) scale(1.03);
+        background: var(--terracota-dark);
       }
 
       .slider__btn--prev {
@@ -375,247 +581,546 @@
         display: flex;
         gap: 8px;
         justify-content: center;
-        padding: 12px 12px 16px;
-        border-top: 1px solid var(--border);
+        padding: 14px 12px 18px;
+        border-top: 1px solid var(--line);
       }
 
       .slider__dot {
-        width: 9px;
-        height: 9px;
-        border-radius: 999px;
-        border: 1px solid var(--border);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 1.5px solid var(--chocolate);
         background: transparent;
         cursor: pointer;
-        opacity: 0.85;
       }
 
       .slider__dot.is-active {
-        background: var(--primary);
-        border-color: var(--primary);
-        box-shadow: 0 0 12px var(--primary-soft);
+        background: var(--terracota);
+        border-color: var(--terracota);
+      }
+
+            /* Selector de idioma */
+      .lang {
+        display: inline-flex;
+        margin: 1rem 0 0 0.9rem;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+        align-self: flex-start;
+      }
+
+      .lang button {
+        padding: 0.35rem 0.85rem;
+        border: none;
+        background: transparent;
+        color: var(--muted);
+        font: inherit;
+        font-size: 0.85rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .lang button:hover {
+        color: var(--terracota-dark);
+        background: var(--terracota-soft);
+      }
+
+      .lang button[aria-pressed="true"] {
+        background: var(--chocolate);
+        color: var(--terracota-soft);
+      }
+
+      @media (max-width: 960px) {
+        .lang {
+          margin: 0 0 0 0.75rem;
+          align-self: center;
+          flex: none;
+        }
+      }
+
+      /* ===== Responsive ===== */
+      @media (max-width: 960px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          height: auto;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 0.5rem 1rem;
+          padding: 0.9rem 1.25rem;
+          border-right: none;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .brand h1 {
+          font-size: 1.15rem;
+        }
+
+        .brand p,
+        .sidebar__contact {
+          display: none;
+        }
+
+        .nav {
+          flex-direction: row;
+          gap: 0;
+          overflow-x: auto;
+        }
+
+        .nav a {
+          border-left: none;
+          border-bottom: 3px solid transparent;
+          border-radius: 8px 8px 0 0;
+          padding: 0.45rem 0.7rem;
+          white-space: nowrap;
+          font-size: 0.9rem;
+        }
+
+        .nav a[aria-current="true"] {
+          border-bottom-color: var(--terracota);
+        }
+
+        main {
+          padding: 0 1.25rem;
+          max-width: none;
+        }
+
+        .hero {
+          padding: 4rem 0 3.5rem;
+        }
+
+        section {
+          padding: 3.5rem 0;
+        }
+
+        .contact__panel {
+          padding: 2.5rem 1.5rem;
+        }
       }
 
       @media (max-width: 520px) {
+        .skills {
+          grid-template-columns: 1fr;
+        }
         .slider__btn {
           width: 40px;
           height: 40px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          transition: none !important;
         }
       }
     </style>
   </head>
 
   <body>
-    <div class="stars"></div>
-
-    <header>
-      <h1>
-        Huesly <br />
-        Carvajal
-      </h1>
-      <nav>
-        <a href="#about">Sobre mí</a>
-        <a href="#skills">Habilidades</a>
-        <a href="#projects">Proyectos</a>
-        <a href="#contact">Contacto</a>
-      </nav>
-    </header>
-
-    <main>
-      <!-- HERO -->
-      <section class="hero">
-        <div>
-          <h2>Frontend <span>Developer</span></h2>
-          <p>
-            Desarrollo interfaces modernas, rápidas y responsivas utilizando
-            HTML, CSS y JavaScript. Me enfoco en experiencias limpias con diseño
-            minimalista.
-          </p>
-          <div class="buttons">
-            <a href="#projects" class="primary">Ver proyectos</a>
-            <a href="#contact">Contactar</a>
-          </div>
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="brand">
+          <h1>Huesly<br />Carvajal</h1>
+          <p>Frontend Developer</p>
         </div>
-      </section>
 
-      <!-- ABOUT -->
-      <section id="about">
-        <h3 class="section-title">Sobre mí</h3>
-        <p style="color: var(--muted); max-width: 700px">
-          Soy desarrollador frontend especializado en la creación de interfaces
-          web modernas, accesibles y optimizadas. He trabajado en landing pages,
-          paneles administrativos y sitios corporativos, cuidando tanto el
-          diseño como la experiencia del usuario.
-        </p>
-      </section>
-
-      <!-- SKILLS -->
-      <section id="skills">
-        <h3 class="section-title">Habilidades</h3>
-        <div class="skills">
-          <div class="skill">HTML5</div>
-          <div class="skill">CSS</div>
-          <div class="skill">JavaScript</div>
-          <div class="skill">Responsive Design</div>
-          <div class="skill">Git & GitHub</div>
-          <div class="skill">UE5 Blueprints</div>
-        </div>
-      </section>
-
-      <!-- PROJECTS -->
-      <section id="projects">
-        <h3 class="section-title">Proyectos</h3>
-        <div class="projects">
-          <div class="project">
-            <div>
-              <h3>Los santos360</h3>
-              <p>
-                Sitio web turístico con diseño responsive y enfoque en
-                experiencia de usuario.
-              </p>
-              <div class="tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>SEO</span>
-                <span>Responsive</span>
-                <span>JavaScript</span>
-              </div>
-            </div>
-            <a href="https://lossantos360.com/" target="_blank"
-              >Ver proyecto →</a
-            >
+        <nav class="nav" aria-label="Principal">
+          <a href="#inicio">Inicio</a>
+          <a href="#about">Sobre mí</a>
+          <a href="#skills">Habilidades</a>
+          <a href="#projects">Proyectos</a>
+          <a href="#contact">Contacto</a>
+          <div class="lang" role="group" aria-label="Idioma">
+            <button type="button" data-lang="es" aria-pressed="true">ES</button>
+            <button type="button" data-lang="en" aria-pressed="false">EN</button>
           </div>
+        </nav>
 
-          <div class="project">
-            <div>
-              <h3>Sonar</h3>
-              <p>
-                Landing page moderna diseñada para fortalecer la presencia
-                digital de la empresa, enfocada en comunicar su propuesta de
-                valor de forma clara y atractiva para el usuario.
-              </p>
-              <div class="tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-                <span>Responsive</span>
-              </div>
-            </div>
-            <a href="https://sonar.com.co/" target="_blank">Ver proyecto →</a>
-          </div>
-
-          <div class="project">
-            <div>
-              <h3>Territorios</h3>
-              <p>
-                Web enfocada en mobile para contribuir a la comprencion y
-                aplicacion de estrategias de intervención en cada comunidad.
-              </p>
-              <div class="tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-                <span>Responsive</span>
-              </div>
-            </div>
-            <button class="open-gallery" data-gallery="territorios">
-              Ver imágenes →
-            </button>
-          </div>
-
-          <div class="project">
-            <div>
-              <h3>Carta Interactiva Zona Café</h3>
-              <p>
-                Diseño de una carta digital optimizada para tablets, enfocada en
-                una experiencia de usuario intuitiva que agiliza la toma de
-                pedidos dentro del restaurante.
-              </p>
-              <div class="tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-                <span>Responsive</span>
-              </div>
-            </div>
-            <button class="open-gallery" data-gallery="carta">
-              Ver imágenes →
-            </button>
-          </div>
-
-          <div class="project">
-            <div>
-              <h3>Appgro</h3>
-              <p>
-                Desarrollo frontend de una landing page one-page con traducción
-                ES/EN, implementada en HTML, CSS y JavaScript, priorizando
-                simplicidad, rendimiento y experiencia de usuario.
-              </p>
-              <div class="tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-                <span>Responsive</span>
-              </div>
-            </div>
-            <button class="open-gallery" data-gallery="appgro">
-              Ver imágenes →
-            </button>
-          </div>
-
-          <div class="project">
-            <div>
-              <h3>Acolcti</h3>
-              <p>
-                Landing page moderna diseñada para fortalecer la presencia
-                digital de la empresa, enfocada en comunicar su propuesta de
-                valor de forma clara y atractiva para el usuario.
-              </p>
-              <div class="tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>PHP</span>
-                <span>JavaScript</span>
-                <span>Responsive</span>
-              </div>
-            </div>
-            <a href="https://acolcti.com/" target="_blank">Ver proyecto →</a>
-          </div>
-
-          <div class="project">
-            <div>
-              <h3>Separa y Gana</h3>
-              <p>
-                Proyecto de videojuego desarrollado en Unreal Engine 5, donde
-                participé como apoyo externo a través de una empresa tercera,
-                encargándome de la arquitectura de la lógica del juego con
-                Blueprints para su presentación en el IMCT de Bucaramanga.
-              </p>
-              <div class="tags">
-                <span>UE5</span>
-                <span>Blueprints</span>
-              </div>
-            </div>
-            <a href="" target="_blank">Ver proyecto →</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact">
-        <h3 class="section-title">Contacto</h3>
-        <p style="color: var(--muted); margin-bottom: 1rem">
-          ¿Tienes un proyecto o una vacante? Hablemos.
-        </p>
-        <div class="buttons">
-          <a href="mailto:hueslyc@gmail.com" class="primary">Enviar correo</a>
-          <a href="https://www.linkedin.com/in/huesly-carvajal/" target="_blank"
+        <div class="sidebar__contact">
+          <a href="mailto:hueslyc@gmail.com">hueslyc@gmail.com</a>
+          <a
+            href="https://www.linkedin.com/in/huesly-carvajal/"
+            target="_blank"
+            rel="noopener"
             >LinkedIn</a
           >
         </div>
-      </section>
-    </main>
+      </aside>
 
-    <footer>© 2026 — Portafolio Huesly Frontend</footer>
+      <div>
+        <main>
+          <!-- HERO -->
+          <section class="hero" id="inicio">
+            <h2>Interfaces web que se entienden a la primera</h2>
+            <p>
+              Desarrollo interfaces modernas, rápidas y responsivas con HTML,
+              CSS y JavaScript. Me enfoco en experiencias limpias con diseño
+              minimalista.
+            </p>
+            <div class="buttons">
+              <a href="#projects" class="btn btn--primary">Ver proyectos</a>
+              <a href="#contact" class="btn">Contactar</a>
+            </div>
+          </section>
+
+          <!-- ABOUT -->
+          <section id="about" class="about">
+            <h2 class="section-title">Sobre mí</h2>
+            <p>
+              Soy desarrollador frontend especializado en la creación de
+              interfaces web modernas, accesibles y optimizadas. He trabajado en
+              landing pages, paneles administrativos y sitios corporativos,
+              cuidando tanto el diseño como la experiencia del usuario.
+            </p>
+          </section>
+
+          <!-- SKILLS -->
+          <section id="skills">
+            <h2 class="section-title">Habilidades</h2>
+            <ul class="skills">
+              <li>HTML5</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>Vue.js</li>
+              <li>Tailwind CSS</li>
+              <li>Figma</li>
+              <li>UX/UI</li>
+              <li>Responsive Design</li>
+              <li>Git &amp; GitHub</li>
+              <li>UE5 Blueprints</li>
+            </ul>
+          </section>
+
+          <!-- PROJECTS -->
+          <section id="projects">
+            <h2 class="section-title">Proyectos</h2>
+            <div class="projects">
+              <article class="project">
+                <div class="project__cover" data-initial="PD">
+                  <span class="project__badge">Destacado</span>
+                </div>
+                <div class="project__body">
+                  <h3>PARQUEARSE - DIGITAL</h3>
+                  <p>
+                    Aplicativo web desarrollado con Vue y Tailwind CSS. Estuve
+                    a cargo de todo el frontend y del diseño de las interfaces,
+                    con mockups realizados en Figma.
+                  </p>
+                  <ul class="tags">
+                    <li>Vue</li>
+                    <li>JavaScript</li>
+                    <li>Tailwind CSS</li>
+                    <li>Figma</li>
+                  </ul>
+                  <a
+                    class="project__link"
+                    href="https://mensualidades.parquearse.com/login"
+                    target="_blank"
+                    rel="noopener"
+                    >Ver proyecto</a
+                  >
+                </div>
+              </article>
+
+              <article class="project">
+                <div class="project__cover" data-initial="LS">
+                  <span class="project__badge">Destacado</span>
+                </div>
+                <div class="project__body">
+                  <h3>Los santos360</h3>
+                  <p>
+                    Sitio web turístico con diseño responsive y enfoque en
+                    experiencia de usuario.
+                  </p>
+                  <ul class="tags">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>SEO</li>
+                    <li>Responsive</li>
+                    <li>JavaScript</li>
+                  </ul>
+                  <a
+                    class="project__link"
+                    href="https://lossantos360.com/"
+                    target="_blank"
+                    rel="noopener"
+                    >Ver proyecto</a
+                  >
+                </div>
+              </article>
+
+              <article class="project">
+                <div class="project__cover" data-initial="UTC"></div>
+                <div class="project__body">
+                  <h3>UTC del Sur</h3>
+                  <p>
+                    Desarrollo del frontend del sitio web de UTC del Sur, implementado con HTML, CSS y JavaScript.
+                  </p>
+                  <ul class="tags">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                  </ul>
+                  <a
+                    class="project__link"
+                    href="https://www.utcdelsur.edu.co/"
+                    target="_blank"
+                    rel="noopener"
+                    >Ver proyecto</a
+                  >
+                </div>
+              </article>
+
+              <article class="project">
+                <div
+                  class="project__cover project__cover--alt"
+                  data-initial="NU"
+                ></div>
+                <div class="project__body">
+                  <h3>Nexus-U</h3>
+                  <p>
+                    Proyecto investigativo desarrollado dentro de un semillero
+                    de investigación, en el que participo actualmente.
+                  </p>
+                  <ul class="tags">
+                    <li>Investigación</li>
+                    <li>Semillero</li>
+                    <li>En curso</li>
+                  </ul>
+                  <span class="project__note">Proyecto en desarrollo</span>
+                </div>
+              </article>
+
+              <article class="project">
+                <div
+                  class="project__cover project__cover--alt"
+                  data-initial="S"
+                ></div>
+                <div class="project__body">
+                  <h3>Sonar</h3>
+                  <p>
+                    Landing page moderna diseñada para fortalecer la presencia
+                    digital de la empresa, enfocada en comunicar su propuesta de
+                    valor de forma clara y atractiva para el usuario.
+                  </p>
+                  <ul class="tags">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>Responsive</li>
+                  </ul>
+                  <a
+                    class="project__link"
+                    href="https://sonar.com.co/"
+                    target="_blank"
+                    rel="noopener"
+                    >Ver proyecto</a
+                  >
+                </div>
+              </article>
+
+              <article class="project">
+                <button
+                  class="project__cover open-gallery"
+                  data-gallery="territorios"
+                  data-initial="T"
+                  aria-label="Ver imágenes de Territorios"
+                >
+                  <img
+                    src="assets/territorios/1.jpeg"
+                    alt=""
+                    loading="lazy"
+                    onerror="this.remove()"
+                  />
+                </button>
+                <div class="project__body">
+                  <h3>Territorios</h3>
+                  <p>
+                    Web enfocada en mobile para contribuir a la comprensión y
+                    aplicación de estrategias de intervención en cada
+                    comunidad.
+                  </p>
+                  <ul class="tags">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>Responsive</li>
+                  </ul>
+                  <button
+                    class="project__link open-gallery"
+                    data-gallery="territorios"
+                  >
+                    Ver imágenes
+                  </button>
+                </div>
+              </article>
+
+              <article class="project">
+                <button
+                  class="project__cover open-gallery"
+                  data-gallery="carta"
+                  data-initial="ZC"
+                  aria-label="Ver imágenes de Carta Interactiva Zona Café"
+                >
+                  <img
+                    src="assets/carta/1.png"
+                    alt=""
+                    loading="lazy"
+                    onerror="this.remove()"
+                  />
+                </button>
+                <div class="project__body">
+                  <h3>Carta Interactiva Zona Café</h3>
+                  <p>
+                    Diseño de una carta digital optimizada para tablets,
+                    enfocada en una experiencia de usuario intuitiva que agiliza
+                    la toma de pedidos dentro del restaurante.
+                  </p>
+                  <ul class="tags">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>Responsive</li>
+                  </ul>
+                  <button
+                    class="project__link open-gallery"
+                    data-gallery="carta"
+                  >
+                    Ver imágenes
+                  </button>
+                </div>
+              </article>
+
+              <article class="project">
+                <button
+                  class="project__cover open-gallery"
+                  data-gallery="appgro"
+                  data-initial="A"
+                  aria-label="Ver imágenes de Appgro"
+                >
+                  <img
+                    src="assets/appgro/1.png"
+                    alt=""
+                    loading="lazy"
+                    onerror="this.remove()"
+                  />
+                </button>
+                <div class="project__body">
+                  <h3>Appgro</h3>
+                  <p>
+                    Desarrollo frontend de una landing page one-page con
+                    traducción ES/EN, implementada en HTML, CSS y JavaScript,
+                    priorizando simplicidad, rendimiento y experiencia de
+                    usuario.
+                  </p>
+                  <ul class="tags">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>Responsive</li>
+                  </ul>
+                  <button
+                    class="project__link open-gallery"
+                    data-gallery="appgro"
+                  >
+                    Ver imágenes
+                  </button>
+                </div>
+              </article>
+
+              <article class="project">
+                <div
+                  class="project__cover project__cover--alt"
+                  data-initial="AC"
+                ></div>
+                <div class="project__body">
+                  <h3>Acolcti</h3>
+                  <p>
+                    Landing page moderna diseñada para fortalecer la presencia
+                    digital de la empresa, enfocada en comunicar su propuesta de
+                    valor de forma clara y atractiva para el usuario.
+                  </p>
+                  <ul class="tags">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>PHP</li>
+                    <li>JavaScript</li>
+                    <li>Responsive</li>
+                  </ul>
+                  <a
+                    class="project__link"
+                    href="https://acolcti.com/"
+                    target="_blank"
+                    rel="noopener"
+                    >Ver proyecto</a
+                  >
+                </div>
+              </article>
+
+              <article class="project">
+                <div class="project__cover" data-initial="SG"></div>
+                <div class="project__body">
+                  <h3>Separa y Gana</h3>
+                  <p>
+                    Proyecto de videojuego desarrollado en Unreal Engine 5,
+                    donde participé como apoyo externo a través de una empresa
+                    tercera, encargándome de la arquitectura de la lógica del
+                    juego con Blueprints para su presentación en el IMCT de
+                    Bucaramanga.
+                  </p>
+                  <ul class="tags">
+                    <li>UE5</li>
+                    <li>Blueprints</li>
+                  </ul>
+                  <!-- Cuando tengas el enlace, cámbialo por:
+                  <a class="project__link" href="TU_ENLACE" target="_blank" rel="noopener">Ver proyecto</a> -->
+                  <span class="project__note">Presentado en el IMCT</span>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- CONTACT -->
+          <section id="contact" class="contact">
+            <div class="contact__panel">
+              <h2>¿Tienes un proyecto o una vacante? Hablemos.</h2>
+              <p>
+                Cuéntame qué necesitas y te respondo con los siguientes pasos.
+              </p>
+              <div class="buttons">
+                <a href="mailto:hueslyc@gmail.com" class="btn btn--primary"
+                  >Enviar correo</a
+                >
+                <a
+                  href="https://www.linkedin.com/in/huesly-carvajal/"
+                  target="_blank"
+                  rel="noopener"
+                  class="btn"
+                  >LinkedIn</a
+                >
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer>
+          <div style="padding: 0 3rem">© 2026 — Portafolio Huesly Frontend</div>
+        </footer>
+      </div>
+    </div>
 
     <!-- Modal Slider -->
     <div class="modal" id="galleryModal" aria-hidden="true">
@@ -657,20 +1162,39 @@
     </div>
 
     <script>
-      // Scroll suave
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth",
+      let lang = "es";
+      function tr(text) {
+        return lang === "en" && I18N_EN[text] ? I18N_EN[text] : text;
+      }
+
+      // ===== Nav activa según la sección visible =====
+      const navLinks = [...document.querySelectorAll(".nav a")];
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            navLinks.forEach((a) =>
+              a.setAttribute(
+                "aria-current",
+                a.getAttribute("href") === "#" + entry.target.id
+                  ? "true"
+                  : "false"
+              )
+            );
           });
-        });
+        },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+      navLinks.forEach((a) => {
+        const target = document.querySelector(a.getAttribute("href"));
+        if (target) observer.observe(target);
       });
 
       // ===== Modal Slider =====
       const galleries = {
         territorios: {
           title: "Territorios — Galería",
+          titleEn: "Territorios — Gallery",
           images: [
             "assets/territorios/1.jpeg",
             "assets/territorios/2.jpeg",
@@ -680,6 +1204,7 @@
         },
         carta: {
           title: "Carta Interactiva — Galería",
+          titleEn: "Interactive Menu — Gallery",
           images: [
             "assets/carta/1.png",
             "assets/carta/2.png",
@@ -688,6 +1213,7 @@
         },
         appgro: {
           title: "Appgro — Galería",
+          titleEn: "Appgro — Gallery",
           images: [
             "assets/appgro/1.png",
             "assets/appgro/2.png",
@@ -706,13 +1232,16 @@
 
       let currentGallery = null;
       let currentIndex = 0;
+      let lastFocused = null;
 
       function openModal(galleryKey) {
         currentGallery = galleries[galleryKey];
         if (!currentGallery) return;
 
+        lastFocused = document.activeElement;
         currentIndex = 0;
-        modalTitle.textContent = currentGallery.title;
+        modalTitle.textContent =
+          lang === "en" ? currentGallery.titleEn : currentGallery.title;
 
         renderDots();
         renderSlide();
@@ -720,6 +1249,7 @@
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
+        closeBtn.focus();
       }
 
       function closeModal() {
@@ -730,13 +1260,11 @@
         currentIndex = 0;
         dotsWrap.innerHTML = "";
         sliderImg.removeAttribute("src");
+        if (lastFocused) lastFocused.focus();
       }
 
       function renderSlide() {
-        const src = currentGallery.images[currentIndex];
-        sliderImg.src = src;
-
-        // dots active
+        sliderImg.src = currentGallery.images[currentIndex];
         [...dotsWrap.children].forEach((dot, i) => {
           dot.classList.toggle("is-active", i === currentIndex);
         });
@@ -747,7 +1275,7 @@
         currentGallery.images.forEach((_, i) => {
           const b = document.createElement("button");
           b.className = "slider__dot" + (i === 0 ? " is-active" : "");
-          b.setAttribute("aria-label", "Ir a imagen " + (i + 1));
+          b.setAttribute("aria-label", tr("Ir a imagen") + " " + (i + 1));
           b.addEventListener("click", () => {
             currentIndex = i;
             renderSlide();
@@ -770,29 +1298,146 @@
         renderSlide();
       }
 
-      // Botones abrir galería
       document.querySelectorAll(".open-gallery").forEach((btn) => {
         btn.addEventListener("click", () => openModal(btn.dataset.gallery));
       });
 
-      // Controles
       prevBtn.addEventListener("click", prev);
       nextBtn.addEventListener("click", next);
       closeBtn.addEventListener("click", closeModal);
 
-      // Cerrar al hacer click fuera
       modal.addEventListener("click", (e) => {
         if (e.target.dataset.close === "true") closeModal();
       });
 
-      // Teclado: ESC / flechas
       document.addEventListener("keydown", (e) => {
         if (!modal.classList.contains("is-open")) return;
-
         if (e.key === "Escape") closeModal();
         if (e.key === "ArrowLeft") prev();
         if (e.key === "ArrowRight") next();
       });
+    
+      // ===== Idioma ES / EN =====
+      const I18N_EN = {
+        "Principal": "Main",
+        "Idioma": "Language",
+        "Inicio": "Home",
+        "Sobre mí": "About",
+        "Habilidades": "Skills",
+        "Proyectos": "Projects",
+        "Contacto": "Contact",
+        "Interfaces web que se entienden a la primera": "Web interfaces that make sense at first glance",
+        "Desarrollo interfaces modernas, rápidas y responsivas con HTML, CSS y JavaScript. Me enfoco en experiencias limpias con diseño minimalista.": "I build modern, fast, responsive interfaces with HTML, CSS and JavaScript. I focus on clean experiences with minimalist design.",
+        "Ver proyectos": "View projects",
+        "Contactar": "Get in touch",
+        "Soy desarrollador frontend especializado en la creación de interfaces web modernas, accesibles y optimizadas. He trabajado en landing pages, paneles administrativos y sitios corporativos, cuidando tanto el diseño como la experiencia del usuario.": "I'm a frontend developer specialized in building modern, accessible and optimized web interfaces. I've worked on landing pages, admin panels and corporate sites, caring for both design and user experience.",
+        "Destacado": "Featured",
+        "Aplicativo web desarrollado con Vue y Tailwind CSS. Estuve a cargo de todo el frontend y del diseño de las interfaces, con mockups realizados en Figma.": "Web application built with Vue and Tailwind CSS. I was in charge of the entire frontend and the interface design, with mockups created in Figma.",
+        "Sitio web turístico con diseño responsive y enfoque en experiencia de usuario.": "Tourism website with responsive design and a focus on user experience.",
+        "Desarrollo del frontend del sitio web de UTC del Sur, implementado con HTML, CSS y JavaScript.": "Frontend development of the UTC del Sur website, built with HTML, CSS and JavaScript.",
+        "Proyecto investigativo desarrollado dentro de un semillero de investigación, en el que participo actualmente.": "Research project within a research seedbed group (semillero de investigación), in which I currently take part.",
+        "Investigación": "Research",
+        "Semillero": "Research group",
+        "En curso": "Ongoing",
+        "Proyecto en desarrollo": "Project in progress",
+        "Landing page moderna diseñada para fortalecer la presencia digital de la empresa, enfocada en comunicar su propuesta de valor de forma clara y atractiva para el usuario.": "Modern landing page designed to strengthen the company's digital presence, focused on communicating its value proposition clearly and attractively.",
+        "Web enfocada en mobile para contribuir a la comprensión y aplicación de estrategias de intervención en cada comunidad.": "Mobile-first web app that helps people understand and apply intervention strategies in each community.",
+        "Carta Interactiva Zona Café": "Zona Café Interactive Menu",
+        "Diseño de una carta digital optimizada para tablets, enfocada en una experiencia de usuario intuitiva que agiliza la toma de pedidos dentro del restaurante.": "Design of a digital menu optimized for tablets, focused on an intuitive user experience that speeds up order taking inside the restaurant.",
+        "Desarrollo frontend de una landing page one-page con traducción ES/EN, implementada en HTML, CSS y JavaScript, priorizando simplicidad, rendimiento y experiencia de usuario.": "Frontend development of a one-page landing site with ES/EN translation, built with HTML, CSS and JavaScript, prioritizing simplicity, performance and user experience.",
+        "Proyecto de videojuego desarrollado en Unreal Engine 5, donde participé como apoyo externo a través de una empresa tercera, encargándome de la arquitectura de la lógica del juego con Blueprints para su presentación en el IMCT de Bucaramanga.": "Video game project built in Unreal Engine 5, where I took part as external support through a third-party company, handling the game logic architecture with Blueprints for its presentation at the IMCT in Bucaramanga.",
+        "Presentado en el IMCT": "Presented at the IMCT",
+        "Ver proyecto": "View project",
+        "Ver imágenes": "View images",
+        "¿Tienes un proyecto o una vacante? Hablemos.": "Have a project or an open position? Let's talk.",
+        "Cuéntame qué necesitas y te respondo con los siguientes pasos.": "Tell me what you need and I'll reply with the next steps.",
+        "Enviar correo": "Send email",
+        "© 2026 — Portafolio Huesly Frontend": "© 2026 — Huesly Frontend Portfolio",
+        "Galería": "Gallery",
+        "Cerrar": "Close",
+        "Anterior": "Previous",
+        "Siguiente": "Next",
+        "Captura del proyecto": "Project screenshot",
+        "Ir a imagen": "Go to image",
+        "Ver imágenes de Territorios": "View Territorios images",
+        "Ver imágenes de Carta Interactiva Zona Café": "View Zona Café Interactive Menu images",
+        "Ver imágenes de Appgro": "View Appgro images",
+        "Portafolio de Huesly Carvajal, desarrollador frontend: interfaces web modernas, rápidas y responsivas.": "Portfolio of Huesly Carvajal, frontend developer: modern, fast, responsive web interfaces.",
+      };
+
+      const textOriginals = new Map();
+      const attrOriginals = new WeakMap();
+      const normalize = (str) => str.replace(/\s+/g, " ").trim();
+
+      function applyLang(next) {
+        lang = next;
+        document.documentElement.lang = next;
+
+        // Textos
+        const walker = document.createTreeWalker(
+          document.body,
+          NodeFilter.SHOW_TEXT,
+          {
+            acceptNode(node) {
+              const parent = node.parentNode;
+              if (
+                parent.nodeName === "SCRIPT" ||
+                parent.nodeName === "STYLE" ||
+                parent.id === "modalTitle" ||
+                !node.nodeValue.trim()
+              )
+                return NodeFilter.FILTER_REJECT;
+              return NodeFilter.FILTER_ACCEPT;
+            },
+          }
+        );
+        let node;
+        while ((node = walker.nextNode())) {
+          if (!textOriginals.has(node)) textOriginals.set(node, node.nodeValue);
+          const original = textOriginals.get(node);
+          const en = I18N_EN[normalize(original)];
+          node.nodeValue = next === "en" && en ? en : original;
+        }
+
+        // Atributos accesibles
+        document.querySelectorAll("[aria-label], [alt]").forEach((el) => {
+          ["aria-label", "alt"].forEach((attr) => {
+            if (!el.hasAttribute(attr)) return;
+            if (!attrOriginals.has(el)) attrOriginals.set(el, {});
+            const saved = attrOriginals.get(el);
+            if (!(attr in saved)) saved[attr] = el.getAttribute(attr);
+            const en = I18N_EN[saved[attr]];
+            el.setAttribute(attr, next === "en" && en ? en : saved[attr]);
+          });
+        });
+
+        // Meta descripción
+        const meta = document.querySelector('meta[name="description"]');
+        if (meta) {
+          if (!meta.dataset.es) meta.dataset.es = meta.content;
+          meta.content =
+            next === "en"
+              ? I18N_EN[meta.dataset.es] || meta.dataset.es
+              : meta.dataset.es;
+        }
+
+        // Estado de los botones
+        document.querySelectorAll(".lang button").forEach((b) => {
+          b.setAttribute("aria-pressed", String(b.dataset.lang === next));
+        });
+
+        try {
+          localStorage.setItem("lang", next);
+        } catch (e) {}
+      }
+
+      document.querySelectorAll(".lang button").forEach((b) => {
+        b.addEventListener("click", () => applyLang(b.dataset.lang));
+      });
+
+      try {
+        if (localStorage.getItem("lang") === "en") applyLang("en");
+      } catch (e) {}
     </script>
   </body>
 </html>
